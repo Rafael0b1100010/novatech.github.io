@@ -5,18 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NOVATECH</title>
     <style>
-        /* Reset para eliminar espaços indesejados */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* 1. Reset e Base Flexível */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #0f172a; /* Cor de fundo das imagens */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f172a; /* Cor de fundo original */
             color: white;
-            min-height: 100vh; /* Ocupa no mínimo 100% da altura da tela */
+            min-height: 100vh; /* Garante que o fundo ocupe toda a tela */
             display: flex;
             flex-direction: column;
         }
 
+        /* 2. Cabeçalho Adaptável */
         .header-tech {
             display: flex;
             justify-content: space-between;
@@ -29,15 +34,33 @@
             z-index: 1000;
         }
 
-        .header-tech h1 { font-size: 1.4rem; color: #38bdf8; }
-        .header-tech ul { display: flex; list-style: none; gap: 15px; }
-        .header-tech a { text-decoration: none; color: white; font-size: 0.9rem; }
+        .header-tech h1 {
+            font-size: clamp(1.2rem, 4vw, 1.8rem); /* Fonte cresce conforme a tela */
+            color: #38bdf8;
+        }
 
-        /* Área da imagem configurada para preencher o espaço */
-        main {
-            flex: 1; /* Estica para ocupar todo o resto da tela */
+        .header-tech ul {
             display: flex;
-            align-items: center;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .header-tech a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .header-tech a:hover {
+            color: #38bdf8;
+        }
+
+        /* 3. Área Principal (O segredo para preencher a tela) */
+        main {
+            flex: 1; /* Ocupa todo o espaço restante verticalmente */
+            display: flex;
+            align-items: center; /* Centraliza a imagem verticalmente se sobrar espaço */
             justify-content: center;
             overflow: hidden;
         }
@@ -45,20 +68,38 @@
         .imagem-grande {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Mantém a imagem inteira sem cortar no celular */
-            max-width: 1200px; /* Evita que a imagem estique demais em monitores gigantes */
+            object-fit: cover; /* Faz a imagem preencher a área sem achatar, cortando bordas se necessário */
+            display: block;
         }
 
-        /* Ajustes para Celulares */
+        /* 4. REGRAS PARA CELULARES (Telas menores que 768px) */
         @media (max-width: 768px) {
-            .header-tech { flex-direction: column; gap: 10px; text-align: center; }
-            .header-tech ul { gap: 10px; }
+            .header-tech {
+                flex-direction: column;
+                padding: 15px;
+                gap: 15px;
+            }
+
+            .header-tech ul {
+                gap: 15px;
+                font-size: 0.9rem;
+            }
+
+            /* No celular, talvez você queira que a imagem não seja cortada (contain) 
+               ou que preencha tudo (cover). Teste o 'cover' abaixo: */
+            .imagem-grande {
+                object-fit: contain; /* Mantém a imagem inteira aparecendo */
+                background-color: #0f172a;
+            }
         }
     </style>
 </head>
 <body>
+
     <header class="header-tech">
-        <h1>Novatech Informática</h1>
+        <div class="logo">
+            <h1>Novatech Informática</h1>
+        </div>
         <nav>
             <ul>
                 <li><a href="#">Início</a></li>
@@ -67,8 +108,10 @@
             </ul>
         </nav>
     </header>
+
     <main>
         <img src="logo-novatech.png" alt="Banner Novatech" class="imagem-grande">
     </main>
+
 </body>
 </html>
