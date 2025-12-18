@@ -60,6 +60,20 @@
         height: auto;     /* A altura se ajusta sozinha ao tamanho real da imagem */
         display: block;   /* Remove espaços em branco abaixo da imagem */
     }
+        /* Quando a tela for menor que 600px (celulares) */
+@media (max-width: 600px) {
+    .header-tech {
+        flex-direction: column; /* Coloca o título em cima e o menu embaixo */
+        text-align: center;
+        gap: 15px;
+    }
+
+    .header-tech ul {
+        gap: 10px;
+        font-size: 0.9rem; /* Diminui um pouco a letra do menu */
+        padding: 0;
+    }
+}
     </style>
 </head>
 
@@ -83,4 +97,5 @@
 
 </body>
 </html>
+
 
