@@ -1,71 +1,101 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <title> NOVATECH </title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Site de teste">
-    <meta name="author" content="Rafael Goncalves">
-    
+    <title>NOVATECH</title>
     <style>
-    /* Reset básico */
-    body, h1, ul {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
+        /* 1. Reset e Base Flexível */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-        font-family: 'Segoe UI', sans-serif;
-        background-color: #0f172a; 
-    }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f172a; /* Cor de fundo original */
+            color: white;
+            min-height: 100vh; /* Garante que o fundo ocupe toda a tela */
+            display: flex;
+            flex-direction: column;
+        }
 
-    .header-tech {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px 5%;
-        background-color: #0f172a; 
-        color: #f8fafc;
-        border-bottom: 2px solid #38bdf8;
-        /* Se quiser que o menu acompanhe a rolagem, mantenha a linha abaixo: */
-        position: sticky; 
-        top: 0;
-    }
+        /* 2. Cabeçalho Adaptável */
+        .header-tech {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background-color: #0f172a;
+            border-bottom: 2px solid #38bdf8;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-    .header-tech h1 {
-        font-size: 1.8rem;
-        color: #38bdf8;
-    }
+        .header-tech h1 {
+            font-size: clamp(1.2rem, 4vw, 1.8rem); /* Fonte cresce conforme a tela */
+            color: #38bdf8;
+        }
 
-    .header-tech ul {
-        display: flex;
-        list-style: none;
-        gap: 20px;
-    }
+        .header-tech ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
 
-    .header-tech a {
-        text-decoration: none;
-        color: white;
-    }
+        .header-tech a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
 
-    /* Estilo para a imagem rolável */
-    .container-imagem-longa {
-        width: 100%;
-        display: block;
-    }
+        .header-tech a:hover {
+            color: #38bdf8;
+        }
 
-    .imagem-grande {
-        width: 100%;      /* Ocupa toda a largura da tela */
-        height: auto;     /* A altura se ajusta sozinha ao tamanho real da imagem */
-        display: block;   /* Remove espaços em branco abaixo da imagem */
-    }
+        /* 3. Área Principal (O segredo para preencher a tela) */
+        main {
+            flex: 1; /* Ocupa todo o espaço restante verticalmente */
+            display: flex;
+            align-items: center; /* Centraliza a imagem verticalmente se sobrar espaço */
+            justify-content: center;
+            overflow: hidden;
+        }
 
-}
+        .imagem-grande {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Faz a imagem preencher a área sem achatar, cortando bordas se necessário */
+            display: block;
+        }
+
+        /* 4. REGRAS PARA CELULARES (Telas menores que 768px) */
+        @media (max-width: 768px) {
+            .header-tech {
+                flex-direction: column;
+                padding: 15px;
+                gap: 15px;
+            }
+
+            .header-tech ul {
+                gap: 15px;
+                font-size: 0.9rem;
+            }
+
+            /* No celular, talvez você queira que a imagem não seja cortada (contain) 
+               ou que preencha tudo (cover). Teste o 'cover' abaixo: */
+            .imagem-grande {
+                object-fit: contain; /* Mantém a imagem inteira aparecendo */
+                background-color: #0f172a;
+            }
+        }
     </style>
 </head>
-
 <body>
+
     <header class="header-tech">
         <div class="logo">
             <h1>Novatech Informática</h1>
@@ -79,13 +109,9 @@
         </nav>
     </header>
 
-    <main class="container-imagem-longa">
+    <main>
         <img src="logo-novatech.png" alt="Banner Novatech" class="imagem-grande">
     </main>
 
 </body>
 </html>
-
-
-
-
